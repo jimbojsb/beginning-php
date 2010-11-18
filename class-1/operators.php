@@ -6,15 +6,15 @@ $anotherString = "Test Value 2";
 $myNumber = 1;
 $myOtherNumber = 2;
 
-// math operators work as you'd expect
-$myTotal = $myNumber + $myOtherNumber;
-
 //short hand
-$myTotal += $myNumber;
+$myTotal -= $myNumber;
+//echo($myTotal);
 
 //concatenation, put any number of things together as a string
 //shorthand works for this too, .=
-$myFulText = $myVariable1 . $anotherString;
-
+$myFullText = "$myVariable1.$anotherString";
+echo($myFullText);
 //is this variable defined at all?
 $exists = isset($myNumber);
+?>
+hello world
