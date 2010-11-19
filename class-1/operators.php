@@ -12,9 +12,9 @@ $myTotal -= $myNumber;
 
 //concatenation, put any number of things together as a string
 //shorthand works for this too, .=
-$myFullText = "$myVariable1.$anotherString";
-echo($myFullText);
+$myFullText = $myVariable1 . $anotherString;
+
+
 //is this variable defined at all?
 $exists = isset($myNumber);
 ?>
-hello world

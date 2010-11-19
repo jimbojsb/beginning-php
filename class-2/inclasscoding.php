@@ -31,6 +31,13 @@ function calcAvg($myValues)
 function generateArraysAndPrintThem()
 {
     for ($c = 0; $c < 10; $c++) {
-        echo calcAvg(generateRandom());
+        
+        $randArray = generateRandom();
+        $avg = calcAvg($randArray);
+        echo $avg . '<br>';
+        // or: echo calcAvg(generateRandom());
+        
     }
 }
+
+generateArraysAndPrintThem();
