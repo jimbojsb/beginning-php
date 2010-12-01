@@ -11,14 +11,51 @@ $strings = array("Austin is the capital of Texas.",
 // write a function that calculates and returns the number of alphanumeric
 // characters in a string. 
 
+function numAlphaNumeric($str)
+{
+    for ($c = 0; $c < strlen($str); $c++) {
+        if (ctype_alnum($str{$c})) {
+            $numAlpha++;
+        }
+    }
+    return $numAlpha;
+}
+
+
 // #2
 // write a function that calculates and returns how many words are in a string
+function numWords($str)
+{
+    return count(explode(' ', $str));
+    //just use str_word_count(), there is no reason for this function to even exist
+}
+
 
 // #3
 // calculate how many spaces are contained in the array of sample strings
+function numSpaces($strArray)
+{
+    foreach ($strArray as $string) {
+        for ($c = 0; $c < strlen($string); $c++) {
+            $numSpaces += $string{$c} === ' ' ? 1 : 0;
+        }
+    }
+    return $numSpaces;
+}
+echo numSpaces($strings) . PHP_EOL;
+
 
 // #4
 // calculate how many capital letters are contained in the array of sample strings
+function numCaps($strArray) {
+    foreach ($strArray as $string) {
+        for ($c = 0; $c < strlen($string); $c++) {
+            $numCaps += strtolower($string{$c}) != $string{$c} ? 1 : 0;
+        }
+    }
+    return $numCaps;
+}
+echo numCaps($strings) . PHP_EOL;
 
 // #5
 // write a function that takes 2 arguments: the first is an array of strings and
