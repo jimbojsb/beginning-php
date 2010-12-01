@@ -24,11 +24,7 @@ function numAlphaNumeric($str)
 
 // #2
 // write a function that calculates and returns how many words are in a string
-function numWords($str)
-{
-    return count(explode(' ', $str));
-    //just use str_word_count(), there is no reason for this function to even exist
-}
+//str_word_count();
 
 
 // #3
@@ -50,7 +46,7 @@ echo numSpaces($strings) . PHP_EOL;
 function numCaps($strArray) {
     foreach ($strArray as $string) {
         for ($c = 0; $c < strlen($string); $c++) {
-            $numCaps += strtolower($string{$c}) != $string{$c} ? 1 : 0;
+            $numCaps += ctype_upper($string{$c}) ? 1 : 0;
         }
     }
     return $numCaps;
@@ -61,6 +57,15 @@ echo numCaps($strings) . PHP_EOL;
 // write a function that takes 2 arguments: the first is an array of strings and
 // the second is a single string. The function should return the number of times the 
 // single string appears within the array of strings
+function numOccurences($strings, $search)
+{
+    $count = 0;
+    foreach ($strings as $string) {
+        $count += substr_count(strtolower($string), $search);
+    }
+    return $count;
+}
+
 
 // #6 -- Super Bonus
 // Using the function from #5, write a function that outputs some statistics about
@@ -69,3 +74,22 @@ echo numCaps($strings) . PHP_EOL;
 // Austin: 1
 // talking: 1
 // muffins: 2
+function wordStats($strings)
+{
+    $masterWordList = array();
+    foreach ($strings as $string) {
+        $words = explode(' ', $string);
+        foreach ($words as $word) {
+            $word = strtolower(trim($word, '.:,!?'));
+            $masterWordList[] = $word;
+        }
+    }
+    $masterWordList = array_unique($masterWordList);
+    foreach ($masterWordList as $word) {
+        echo $word . ": " . numOccurences($strings, $word) . '<br/>';
+    }
+}
+
+
+wordStats($strings);
+
