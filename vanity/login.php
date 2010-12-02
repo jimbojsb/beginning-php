@@ -1,16 +1,33 @@
 <?php
+require_once 'library/util.php';
 
-
-// if we are handling a form post, use user.php to check if the
-// username and password supplied are good and if so, redirect the
-// user to the index page.
+if ($_POST) {
+    
+    $username = 'josh';
+    $password = '1234';
+    
+    if ($_POST['username'] == $username && $_POST['password'] == $password) {
+        redirect('/beginning-php/vanity/');
+    }
+    
+    
+}
 
 // HOMEWORK
 // if authentication fails, show them the form and an error
 // message to that effect
 
+include 'includes/header.php';
 ?>
-<!--
-build a simple html form with one text input and one button.
-make your form submit back to this page
- -->
+
+<form method="POST" action="login.php">
+    <label>Username</label>
+    <input type="text" name="username"/>
+    <label>password</label>
+    <input type="password" name="password"/>
+    <input type="submit"/>
+</form>
+ 
+ 
+ 
+<?php include 'includes/footer.php'?>
