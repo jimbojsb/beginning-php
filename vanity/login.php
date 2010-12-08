@@ -1,25 +1,22 @@
 <?php
 require_once 'library/util.php';
+require_once 'library/user.php';
 
 if ($_POST) {
     
-    $username = 'josh';
-    $password = '1234';
-    
-    if ($_POST['username'] == $username && $_POST['password'] == $password) {
+    if (authenticate($_POST['username'], $_POST['password'])) {
         redirect('/beginning-php/vanity/');
+    } else {
+        $error_message = 'Invalid username or password';
     }
-    
-    
 }
 
-// HOMEWORK
-// if authentication fails, show them the form and an error
-// message to that effect
 
 include 'includes/header.php';
 ?>
-
+<?if ($error_message) {?>
+    <p style="color: red"><?=$error_message?></p>
+<?}?>
 <form method="POST" action="login.php">
     <label>Username</label>
     <input type="text" name="username"/>

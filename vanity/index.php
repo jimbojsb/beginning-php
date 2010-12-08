@@ -1,11 +1,14 @@
 <?php
-include 'includes/header.php';
+require_once 'library/user.php';
 
+include 'includes/header.php';
 ?>
 
+<?if (loggedIn()) {?>
+<a href="logout.php">Logout</a>
+<?} else{?>
 <a href="login.php">Login</a>
-
-<?
-// HOMEWORK: don't show the login link if we're already logged in, show the logout link instead
+<?}
 
 include 'includes/footer.php';
+?>

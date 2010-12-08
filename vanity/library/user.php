@@ -1,19 +1,22 @@
 <?php
+session_start();
 function authenticate($username, $password)
 {
-    // make up a username and password here, and store them as
-    // variables
-    
-    //write code that checks the arguments to make sure they match and returns true or false
-    //if we're going to return true, store the username in the user's session
+    $real_username = 'josh';
+    $real_password = '1234';
+    if ($username === $real_username && $password === $real_password) {
+        $_SESSION['username'] = $username;
+        return true;
+    }
+    return false;
 }
 
 function getUsername()
 {
-    
+    return $_SESSION['username'];
 }
 
 function loggedIn()
 {
-
+    return isset($_SESSION['username']);
 }

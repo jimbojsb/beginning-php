@@ -1,4 +1,6 @@
-<!--  HOMEWORK: show the current date and time in a pleasing manner -->
 
+<div>
+    Today's Date: <?=date("m/d/Y H:i:s")?>
+</div>
 </body>
 </html>
