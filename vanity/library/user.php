@@ -1,10 +1,23 @@
 <?php
+require_once 'dbconnection.php';
 session_start();
 function authenticate($username, $password)
 {
-    $real_username = 'josh';
-    $real_password = '1234';
-    if ($username === $real_username && $password === $real_password) {
+    global $db;
+    $sql = "SELECT *
+            FROM users
+            WHERE username='$username'
+            LIMIT 1";
+    
+
+    
+    
+    $results = $db->query($sql);
+    
+    $result = $results->fetch(PDO::FETCH_ASSOC);
+   
+    
+    if ($username === $result['username'] && $password === $result['password']) {
         $_SESSION['username'] = $username;
         return true;
     }
