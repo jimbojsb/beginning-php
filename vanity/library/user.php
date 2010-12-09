@@ -20,3 +20,13 @@ function loggedIn()
 {
     return isset($_SESSION['username']);
 }
+
+function createUser($username, $password, $email)
+{
+    //homework helper function
+}
+
+function deleteUser($username)
+{
+    //homework helper function
+}
