@@ -1,7 +1,8 @@
 <pre>
 <?php
 require_once '../vanity/library/Database.php';
-$db = new Database('sqlite:../vanity/db/vanity.sqlite');
+Database::init('sqlite:../vanity/db/vanity.sqlite');
+$db = Database::getInstance();
 
 $sql = "SELECT *
 		FROM users

@@ -3,8 +3,25 @@ class Database
 {
     protected $_pdo;
     protected $_lastStatement;
+    protected static $_instance;
     
-    public function __construct($pdoConnectionString)
+    public static function init($pdoConnectionString)
+    {
+        self::$_instance = new Database($pdoConnectionString);
+    }
+    
+    public static function getInstance($pdoConnectionString = null)
+    {
+        if (!self::$_instance && $pdoConnectionString) {
+            self::init($pdoConnectionString);
+            return self::$_instance;
+        } else if (self::$_instance) {
+            return self::$_instance;
+        }
+        die('cant get instance if you have not initialized');
+    }
+    
+    private function __construct($pdoConnectionString)
     {
         if ($pdoConnectionString) {
             $this->_pdo = new PDO($pdoConnectionString);
