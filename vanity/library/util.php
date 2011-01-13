@@ -1,8 +1,11 @@
 <?php
-function redirect($url)
+class Util
 {
-    if ($url) {
-        header("Location: " . $url);
-        exit();
+    public static function redirect($url)
+    {
+        if ($url) {
+            header("Location: " . $url);
+            exit();
+        }
     }
 }

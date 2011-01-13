@@ -1,9 +1,15 @@
 <?php
 class Person
 {
-    protected $name = 'Foo';
+    protected $name;
+    
+    public function __construct($name)
+    {
+        $this->name = $name;
+    }
+    
     public function __toString()
     {
-        echo $this->name;;
+        return "Person: " . $this->name;
     }
 }

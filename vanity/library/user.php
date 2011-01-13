@@ -1,45 +1,67 @@
 <?php
-require_once 'dbconnection.php';
-session_start();
-function authenticate($username, $password)
+class User
 {
-    global $db;
-    $sql = "SELECT *
-            FROM users
-            WHERE username='$username'
-            LIMIT 1";
+    public $id;
+    public $username;
+    public $email;
+    protected $password;
     
-
+    public function authenticate()
+    {
+        $property = 'username';
+        $method = 'authenticate';
+        $this->$method();
+        if ($this->password && $this->$property) {
+            $db = Database::getInstance();
+            $sql = "SELECT *
+                    FROM users
+                    WHERE username = ?
+                    LIMIT 1";
+            
+            
+            $result = $db->queryOne($sql, $this->username);
     
-    
-    $results = $db->query($sql);
-    
-    $result = $results->fetch(PDO::FETCH_ASSOC);
-   
-    
-    if ($username === $result['username'] && $password === $result['password']) {
-        $_SESSION['username'] = $username;
-        return true;
+            
+            if ($this->username === $result['username'] && $this->password === $result['password']) {
+                $_SESSION['username'] = $this->username;
+                return true;
+            }
+        }
+        return false;
     }
-    return false;
-}
-
-function getUsername()
-{
-    return $_SESSION['username'];
-}
-
-function loggedIn()
-{
-    return isset($_SESSION['username']);
-}
-
-function createUser($username, $password, $email)
-{
-    //homework helper function
-}
-
-function deleteUser($username)
-{
-    //homework helper function
+    
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+    
+    public function getPassword()
+    {
+        return $this->password;
+    }
+    
+    public static function getUsername()
+    {
+        return $_SESSION['username'];
+    }
+    
+    public static function loggedIn()
+    {
+        return isset($_SESSION['username']);
+    }
+    
+    function createUser($username, $password, $email)
+    {
+        //homework helper function
+    }
+    
+    function deleteUser($username)
+    {
+        //homework helper function
+    }
+    
+    public static function logout()
+    {
+        session_destroy();
+    }
 }

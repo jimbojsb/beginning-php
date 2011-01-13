@@ -1,11 +1,14 @@
 <?php
-require_once 'library/util.php';
-require_once 'library/user.php';
+require_once 'bootstrap.php';
 
 if ($_POST) {
     
-    if (authenticate($_POST['username'], $_POST['password'])) {
-        redirect('/beginning-php/vanity/');
+    $user = new User();
+    $user->username = $_POST['username'];
+    $user->setPassword($_POST['password']);
+    
+    if ($user->authenticate()) {
+        Util::redirect('/beginning-php/vanity/');
     } else {
         $error_message = 'Invalid username or password';
     }

@@ -6,9 +6,13 @@ $db = Database::getInstance();
 
 $sql = "SELECT *
 		FROM users
-		WHERE email = ?";
+		WHERE email = ?
+		OR email = ?";
 
-$results = $db->query($sql, 'josh@joshbutts.com');
+$params = array('josh@joshbutts.com',
+                'test@joshbutts.com');
+
+$results = $db->query($sql, $params);
 var_dump($results);
 
 $results = $db->queryOne($sql, 'josh@joshbutts.com');

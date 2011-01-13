@@ -4,7 +4,7 @@ require_once 'bootstrap.php';
 include 'includes/header.php';
 ?>
 
-<?if (loggedIn()) {?>
+<?if (User::loggedIn()) {?>
 <a href="logout.php">Logout</a>
 <?} else{?>
 <a href="login.php">Login</a>
