@@ -1,9 +1,5 @@
 <?php
-class Foo
+class Student extends Person
 {
-    protected $name = 'Foo';
-    public function __toString()
-    {
-        echo $this->name;;
-    }
+
 }

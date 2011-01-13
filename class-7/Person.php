@@ -1,5 +1,9 @@
 <?php
-class Bar extends Foo
+class Person
 {
-    
+    protected $name = 'Foo';
+    public function __toString()
+    {
+        echo $this->name;;
+    }
 }
