@@ -3,7 +3,7 @@ require_once 'bootstrap.php';
 
 if ($_POST) {
     
-    $user = User::findByUsername($_POST['username']);
+    $user = User::getBy('username', $_POST['username']);
     if ($user->authenticate($_POST['password'])) {
         Util::redirect('/beginning-php/vanity/');   
     } else {
