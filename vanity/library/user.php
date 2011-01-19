@@ -1,33 +1,31 @@
 <?php
 class User
-{
-    public $id;
-    public $username;
-    public $email;
-    protected $password;
-    
-    public function authenticate()
+{    
+    public function __construct($data)
     {
-        $property = 'username';
-        $method = 'authenticate';
-        $this->$method();
-        if ($this->password && $this->$property) {
-            $db = Database::getInstance();
-            $sql = "SELECT *
-                    FROM users
-                    WHERE username = ?
-                    LIMIT 1";
-            
-            
-            $result = $db->queryOne($sql, $this->username);
-    
-            
-            if ($this->username === $result['username'] && $this->password === $result['password']) {
-                $_SESSION['username'] = $this->username;
-                return true;
+        if (is_array($data)) {
+            foreach  ($data as $property => $value) {
+                $this->$property = $value;
             }
+        }   
+    }
+    
+    public static function findByUsername($username)
+    {
+        $sql = "SELECT *
+        		FROM users
+        		WHERE username = ?";
+        $db = Database::getInstance();
+        $results = $db->queryOne($sql, $username);
+        if ($results) {
+            return new User($results);
         }
-        return false;
+        return null;
+    }
+    
+    public function authenticate($password)
+    {
+        return $password === $this->password;
     }
     
     public function setPassword($password)

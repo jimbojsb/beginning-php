@@ -3,17 +3,13 @@ require_once 'bootstrap.php';
 
 if ($_POST) {
     
-    $user = new User();
-    $user->username = $_POST['username'];
-    $user->setPassword($_POST['password']);
-    
-    if ($user->authenticate()) {
-        Util::redirect('/beginning-php/vanity/');
+    $user = User::findByUsername($_POST['username']);
+    if ($user->authenticate($_POST['password'])) {
+        Util::redirect('/beginning-php/vanity/');   
     } else {
         $error_message = 'Invalid username or password';
     }
 }
-
 
 include 'includes/header.php';
 ?>
