@@ -1,5 +1,18 @@
 <?php
-// HOMEWORK
-// create a script where a user enters their username and password, and checks a checkbox 
-// acknowleding that they want to delete their account. if the username and password are correct
-// remove their account from the database and redirect them to the homepage. otherwise show an error
+require_once 'bootstrap.php';
+if ($_POST) {
+    $user = User::getLoggedInUser();
+    $deleted = $user->delete();
+    Util::redirect('/beginning-php/vanity');
+}
+
+include 'includes/header.php';
+?>
+<form method="POST" action="deletemyaccount.php">
+	<input type="hidden" name="delete" value="delete"/>
+    <input type="submit" value="Yes, really delete my account"/>
+</form>
+ 
+ 
+ 
+<?php include 'includes/footer.php'?>
