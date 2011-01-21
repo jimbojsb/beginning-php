@@ -28,7 +28,9 @@ class User
         $sql = "INSERT INTO users (`username`, `email`, `password`)
         		VALUES (?, ?, ?)";
         $db = Database::getInstance();
-        $db->query($sql, array($username, $email, $password));
+        $salt = 'somerandomsomething';
+        $hashPassword = sha1($password . "||" . $salt);
+        $db->query($sql, array($username, $email, $hashPassword));
         if ($db->numRows() === 1) {
             return true;
         }
@@ -37,7 +39,9 @@ class User
     
     public function authenticate($password)
     {
-        $valid = $password === $this->password;
+        //look up my salt from the database somewhere
+        $salt = 'somerandomsomething';
+        $valid = sha1($password . "||" . $salt) === $this->password;
         if ($valid) {
             $_SESSION['username'] = $this->username;
         }
